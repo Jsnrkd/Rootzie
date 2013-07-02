@@ -1,0 +1,20 @@
+<div>Search: <input ng-model="query">
+    Sort by:
+    <select ng-model="orderProp">
+        <option value="type">Alphabetical</option>
+        <option value="zip">Zip</option>
+    </select>
+    <a href="#/vegetables/add" class="btn btn-primary">New Record</a>
+</div>
+<table class="table table-striped">
+    <thead>
+    <tr>
+        <th>Type</th>
+        <th>Zip</th>
+    </tr>
+    </thead>
+    <tr ng-repeat="vegetable in vegetables | filter:query | orderBy:orderProp">
+        <td>{{vegetable.vegType}}</td>
+        <td>{{vegetable.zip}}</td>
+    </tr>
+</table>

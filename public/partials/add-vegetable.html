@@ -1,0 +1,20 @@
+<form class="form-horizontal" ng-controller="AddVegetableFormCtrl" ng-submit="submit()" id="addVegetableForm">
+    <div class="control-group">
+        <label class="control-label" for="inputVegType">Type</label>
+        <div class="controls">
+            <input type="text" id="inputVegType" name="vegType" placeholder="Watermelon" required="" ng-model="vegType">
+        </div>
+    </div>
+    <div class="control-group">
+        <label class="control-label" for="inputZip">Zip</label>
+        <div class="controls">
+            <input type="text" id="inputZip" name="zip" placeholder="29205" required="" ng-model="zip">
+        </div>
+    </div>
+    <div class="control-group">
+        <div class="controls">
+            <a href="#/" class="btn btn-danger">Cancel</a>
+            <button type="submit" class="btn">Submit</button>
+        </div>
+    </div>
+</form>

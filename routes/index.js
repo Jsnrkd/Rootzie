@@ -1,4 +1,8 @@
+var mongo = require('mongodb');
 
+var mongoUri = process.env.MONGOLAB_URI ||
+    process.env.MONGOHQ_URL ||
+    'mongodb://localhost/rootzie';
 /*
  * GET home page.
  */
@@ -8,25 +12,21 @@ exports.index = function(req, res){
 };
 
 exports.getVegetables = function(req, res){
-    res.json([
-        {
-            "age": 4,
-            "title": "Cucumber",
-            "location": "SC"
-        },
-        {
-            "age": 1,
-            "title": "Watermelon",
-            "location": "SC"
-        },
-        {
-            "age": 7,
-            "title": "Carrot",
-            "location": "NC"
-        }
-    ]);
+    mongo.Db.connect(mongoUri, function (err, db) {
+        db.collection('vegetables', function(er, collection) {
+            collection.find().toArray(function(er,rs) {
+                res.jsonp(rs);
+            });
+        });
+    });
 };
 
 exports.newVegetable = function(req, res){
-    res.json({"Stat": "Successful"});
+    mongo.Db.connect(mongoUri, function (err, db) {
+        db.collection('vegetables', function(er, collection) {
+            collection.insert({"vegType": req.body.vegType, "zip": req.body.zip, "created_on": new Date()}, function(er,rs) {
+                res.json({"Stat": "Successful"});
+            });
+        });
+    });
 };
